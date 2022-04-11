@@ -1,0 +1,54 @@
+html {
+  height: 90vh;
+}
+
+#title {
+  width: 100%;
+  background-image: linear-gradient(to bottom right, yellow, rgb(0, 204, 255));
+}
+
+/* Main BODY SECTION */
+#main-body {
+  height: 93vh;
+  overflow: auto;
+}
+
+/* LEFT SIDE */
+#left-side-body {
+  border: 1px solid black;
+  height: 100%;
+  max-height: 150%;
+  overflow: auto;
+}
+
+#search-form {
+  width: 100%;
+  padding-bottom: 7%;
+  border-bottom: 3px solid green;
+}
+
+#search-title {
+  font-family: 'Assistant', sans-serif;
+  font-weight: bolder;
+}
+
+#search-history-container {
+  list-style: none;
+}
+
+/* Right Side */
+#right-side-body {
+  border: 1px solid black;
+  height: 100%;
+  max-height: 150%;
+  overflow: auto;
+}
+
+#right-side-top {
+  border: 1px solid black;
+  height: 50vh;
+}
+#right-side-bottom {
+  border: 1px solid black;
+  height: 40vh;
+}
