@@ -11,7 +11,6 @@
 // THEN i am again presented with current and future conditions for that city
 
 // VARIABLES
-let userCity = document.querySelector('#search-input').value;
 let searchBtn = $('#search-btn');
 let searchHistoryContainer = $('#search-history-container');
 let searchHistoryArr = [];
@@ -23,29 +22,46 @@ let rightTopHeader = document.getElementById('top-right-header');
 // FUNCTION Declarations
 function onSearch(e) {
   e.preventDefault();
-  console.log(userCity);
-  if (userCity.length === 0) {
-    return (userCity = 'Austin');
-  }
+  let userCity = document.querySelector('#search-input').value;
+  let element = e.target;
+  clearHistory(element);
+
   getCityInfo(userCity, apiKey);
-  // searchHistory(userCity);
+  searchHistory(userCity);
   return userCity;
+}
+
+function clearHistory(element) {
+  let history =
+    element.parentElement.nextElementSibling.firstChild.nextElementSibling;
+  console.log(history);
+  console.log(history.firstChild);
+  if (history.firstChild) {
+    while (history.firstChild) {
+      history.removeChild(history.firstChild);
+    }
+  }
 }
 
 // Not working correctly Need to find a way select container's children (keep getting Undefined)
 function searchHistory(city) {
   searchHistoryArr.unshift(city);
-  if (searchHistoryArr.length > 5) {
+
+  let uniqCity = [...new Set(searchHistoryArr)];
+  if (uniqCity.length > 5) {
     searchHistoryArr.pop();
   }
-  for (let i = 0; i < searchHistoryArr.length; i++) {
+  console.log(uniqCity);
+  for (let i = 0; i < uniqCity.length; i++) {
     let newBtn = document.createElement('button');
     newBtn.setAttribute('class', 'btn btn-secondary w-100 m-2');
-    newBtn.textContent = searchHistoryArr[0];
+    newBtn.textContent = uniqCity[i];
+    console.log(newBtn);
     searchHistoryContainer.append(newBtn);
+    console.log(searchHistoryContainer);
   }
-  console.log(searchHistoryArr);
 }
+console.log(searchHistoryArr);
 
 // main purpose of this function is to get Longitude and Latitude
 function getCityInfo(city, key) {
@@ -78,5 +94,3 @@ function getCityInfo(city, key) {
 searchBtn.on('click', onSearch);
 
 // top-right-header
-rightTopHeader.textContent = userCity;
-console.log(userCity);
