@@ -18,11 +18,16 @@ let apiKey = 'f44b46adae4f2a1382ec3ffdb78f40c8';
 // right-side-body variables
 // top
 let rightTopHeader = document.getElementById('top-right-header');
+let currTemp = document.getElementById('currTemp');
+let currWind = document.getElementById('wind-speed');
+let currHumidity = document.getElementById('humidity');
+let currUV = document.getElementById('uv-index');
 
 // FUNCTION Declarations
 function onSearch(e) {
   e.preventDefault();
   let userCity = document.querySelector('#search-input').value;
+  rightTopHeader.textContent = userCity + ' ' + '(' + currentDate + ')';
   let element = e.target;
   clearHistory(element);
 
@@ -63,7 +68,7 @@ function searchHistory(city) {
 }
 console.log(searchHistoryArr);
 
-// main purpose of this function is to get Longitude and Latitude
+// main purpose of this function is to get Longitude and Latitude & run current weather function
 function getCityInfo(city, key) {
   let apiUrl =
     'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=' + key;
@@ -75,14 +80,14 @@ function getCityInfo(city, key) {
         console.log(response);
         response.json().then(function (data) {
           console.log(data);
-          // let Latitude = this.lat;
-          // let Longitude = this.lon;
-          // let latLonArr = [Latitude, Longitude];
-          // console.log(latLonArr);
-          // return latLonArr;
+          let lat = data[0].lat;
+          let lon = data[0].lon;
+          console.log([lat, lon, 'yes']);
+          getCurrentWeather(lat, lon, key);
+          fiveDayForecast(lat, lon, key);
         });
       } else {
-        alert('Error: ' + response.statusText); // if response was not okay then its sending an Alert (which is bad bc its a blocker) with the response status displayed
+        alert('Error: 2 ' + response.statusText); // if response was not okay then its sending an Alert (which is bad bc its a blocker) with the response status displayed
       }
     })
     .catch(function (error) {
@@ -90,7 +95,67 @@ function getCityInfo(city, key) {
     });
 }
 
+// Function to get current weather (initiated in City Info function)
+function getCurrentWeather(lat, lon, key) {
+  let apiUrl =
+    'https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=' +
+    lat +
+    '&lon=' +
+    lon +
+    '&appid=' +
+    key;
+  console.log('current weather api:' + apiUrl);
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+        });
+        currTemp.textContent = 'Current Temperature: ' + data.main.temp;
+        currHumidity.textContent = 'Current Humidity: ' + data.main.humidity;
+        currWind.textContent = 'Current Wind Speed: ' + data.wind.speed;
+      } else {
+        alert('Error: 1 ' + response.statusText); // if response was not okay then its sending an Alert (which is bad bc its a blocker) with the response status displayed
+      }
+    })
+    .catch(function (error) {
+      alert('Unable to connect to weatherAPI'); //is there is a server side error then an Alert (which is bad bc its a blocker) with the response will be displayed
+    });
+}
+
+function fiveDayForecast(lat, lon, key) {
+  let apiUrl =
+    'https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=' +
+    lat +
+    '&lon=' +
+    lon +
+    '&exclude=minutely,hourly,alerts&appid=' +
+    key;
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+          currTemp.textContent = 'Temperature: ' + data.current.temp;
+          currHumidity.textContent = 'Humidity: ' + data.current.humidity;
+          currWind.textContent = 'Wind Speed: ' + data.current.speed;
+          currUV.textContent = 'UV Index: ' + data.current.uvi;
+        });
+      } else {
+        alert('Error: ' + response.statusText); // if response was not okay then its sending an Alert (which is bad bc its a blocker) with the response status displayed
+      }
+    })
+    .catch(function (error) {
+      alert('1 Unable to connect to weatherAPI'); //is there is a server side error then an Alert (which is bad bc its a blocker) with the response will be displayed
+    });
+}
+
 // functional CODE
+let currentDate = moment().format('l');
 searchBtn.on('click', onSearch);
 
 // top-right-header

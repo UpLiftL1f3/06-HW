@@ -52,3 +52,6 @@ html {
   border: 1px solid black;
   height: 40vh;
 }
+#current-weather {
+  list-style: none;
+}
