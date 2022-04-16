@@ -42,6 +42,7 @@
             Search
           </button>
         </form>
+        <h4 class="text-center my-2">Search History</h4>
         <section class="d-flex flex-column" id="search-history">
           <div class="container" id="search-history-container"></div>
         </section>
@@ -50,14 +51,60 @@
       <div class="col-9" id="right-side-body">
         <section class="my-1" id="right-side-top">
           <h1 class="text-center" id="top-right-header"></h1>
-          <ul id="current-weather">
-            <li id="currTemp"></li>
-            <li id="wind-speed"></li>
-            <li id="humidity"></li>
-            <li id="uv-index"></li>
-          </ul>
+          <div id="current-container">
+            <ul id="current-weather">
+              <li id="currIcon"></li>
+              <h6 id="currDay"></h6>
+              <li id="currWeatherDescription"></li>
+              <li id="currTemp"></li>
+              <li id="wind-speed"></li>
+              <li id="humidity"></li>
+              <li id="uv-index"></li>
+            </ul>
+          </div>
         </section>
-        <section class="my-1" id="right-side-bottom"></section>
+        <section class="my-1 flex-column container" id="right-side-bottom">
+          <h1 class="my-2 text-center" id="weekly-title"></h1>
+          <div id="weekly-section" class="my">
+            <ul id="weekly-display" class="row">
+              <ul class="col s2 weekly-day" id="day1-data">
+                <h6 class="weekly-data" id="day1"></h6>
+                <li class="weekly-data" id="determined-Icon1"></li>
+                <li class="weekly-data" id="determined-weather1"></li>
+                <li class="weekly-data" id="determined-temp1"></li>
+                <li class="weekly-data" id="determined-wind-speed1"></li>
+              </ul>
+              <ul class="col s2 weekly-day" id="day2-data">
+                <h6 id="day2"></h6>
+                <li class="weekly-data" id="determined-Icon2"></li>
+                <li class="weekly-data" id="determined-weather2"></li>
+                <li class="weekly-data" id="determined-temp2"></li>
+                <li class="weekly-data" id="determined-wind-speed2"></li>
+              </ul>
+              <ul class="col s2 weekly-day" id="day3-data">
+                <h6 id="day3"></h6>
+                <li class="weekly-data" id="determined-Icon3"></li>
+                <li class="weekly-data" id="determined-weather3"></li>
+                <li class="weekly-data" id="determined-temp3"></li>
+                <li class="weekly-data" id="determined-wind-speed3"></li>
+              </ul>
+              <ul class="col s2 weekly-day" id="day4-data">
+                <h6 id="day4"></h6>
+                <li class="weekly-data" id="determined-Icon4"></li>
+                <li class="weekly-data" id="determined-weather4"></li>
+                <li class="weekly-data" id="determined-temp4"></li>
+                <li class="weekly-data" id="determined-wind-speed4"></li>
+              </ul>
+              <ul class="col s2 weekly-day" id="day5-data">
+                <h6 id="day5"></h6>
+                <li class="weekly-data" id="determined-Icon5"></li>
+                <li class="weekly-data" id="determined-weather5"></li>
+                <li class="weekly-data" id="determined-temp5"></li>
+                <li class="weekly-data" id="determined-wind-speed5"></li>
+              </ul>
+            </ul>
+          </div>
+        </section>
       </div>
     </section>
     <!-- scripts -->
