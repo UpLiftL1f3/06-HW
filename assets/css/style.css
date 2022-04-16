@@ -87,3 +87,13 @@ html {
 #day5-data {
   border: none;
 }
+
+@media screen and(max-width: 992px) {
+  #main-body {
+    flex-direction: column;
+  }
+  #weekly-section {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -88,7 +88,7 @@ console.log(searchHistoryArr);
 // main purpose of this function is to get Longitude and Latitude & run current weather function
 function getCityInfo(city, key) {
   let apiUrl =
-    'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=' + key;
+    'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=' + key;
   console.log(apiUrl);
   console.log(city);
   fetch(apiUrl)
